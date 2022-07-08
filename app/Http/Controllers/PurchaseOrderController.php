@@ -375,6 +375,8 @@ class PurchaseOrderController extends Controller
                         $item->save();
 
                     }
+
+
                     // return $sales2;
                     $POpersepatu = array();
                      //mengelompokkan yang punya idsepatu2 yang sama 
@@ -414,16 +416,21 @@ class PurchaseOrderController extends Controller
 
                         $index = array_keys($key);
                         $isi = array_values($key);
-                        // $baru = array_combine($index, $isi);
+                        $baru = array_combine($index, $isi);
                         // return count($key);
+                        // for ($i=0; $i < count($key) ; $i++) { 
+                        //     $purchase3 = new purchase3;
+                        //     $purchase3->purchase1_id =  $purchase1_id;
+                        //     $purchase3->sepatu2_id = $idsepatuKey[$j];
+                        //     $purchase3->size = $index[$i];
+                        //     $purchase3->qty = $isi[$i];
+                        //     $purchase3->save();
+                        // }
+                        $data = array();
                         for ($i=0; $i < count($key) ; $i++) { 
-                            $purchase3 = new purchase3;
-                            $purchase3->purchase1_id =  $purchase1_id;
-                            $purchase3->sepatu2_id = $idsepatuKey[$j];
-                            $purchase3->size = $index[$i];
-                            $purchase3->qty = $isi[$i];
-                            $purchase3->save();
+                            $data[] = [ 'purchase1_id'=>$purchase1_id, 'sepatu2_id'=>$idsepatuKey[$j], 'size'=>$index[$i], 'qty'=>$isi[$i]];
                         }
+                            $purchase3 = purchase3::insert($data);
 
                                                         
                         $j++;
